@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2024 at 12:53 PM
+-- Generation Time: Jul 03, 2024 at 02:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -92,6 +92,30 @@ INSERT INTO `chart` (`cid`, `sender`, `receiver`, `message`, `timestamp`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `coid` int(11) NOT NULL,
+  `fid` int(11) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `createdDate` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`coid`, `fid`, `comment`, `email`, `createdDate`) VALUES
+(1, 1, 'nice work', 'student@gmil.com', '2024-07-03 11:03:42'),
+(2, 1, 'you did good', 'student@gmil.com', '2024-07-03 11:10:46'),
+(3, 3, 'visit youtube search mathematics you will see more videos', 'jigue@gmail.com', '2024-07-03 12:06:01'),
+(4, 3, 'find a guy call jimmy in level 7-2 is the best', 'administrator@gmail.com', '2024-07-03 12:16:22');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `consultant_sessions`
 --
 
@@ -107,6 +131,27 @@ CREATE TABLE `consultant_sessions` (
 
 INSERT INTO `consultant_sessions` (`csid`, `username`, `sid`) VALUES
 (3, 'jigue@gmail.com', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forum`
+--
+
+CREATE TABLE `forum` (
+  `fid` int(11) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `caption` text DEFAULT NULL,
+  `image` varchar(30) DEFAULT NULL,
+  `createdDate` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `forum`
+--
+
+INSERT INTO `forum` (`fid`, `email`, `caption`, `image`, `createdDate`) VALUES
+(3, 'student@gmil.com', 'am not good with dy/dx what should i do', '80377.jpg', '2024-07-03 11:17:47');
 
 -- --------------------------------------------------------
 
@@ -201,10 +246,22 @@ ALTER TABLE `chart`
   ADD PRIMARY KEY (`cid`);
 
 --
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`coid`);
+
+--
 -- Indexes for table `consultant_sessions`
 --
 ALTER TABLE `consultant_sessions`
   ADD PRIMARY KEY (`csid`);
+
+--
+-- Indexes for table `forum`
+--
+ALTER TABLE `forum`
+  ADD PRIMARY KEY (`fid`);
 
 --
 -- Indexes for table `session`
@@ -248,10 +305,22 @@ ALTER TABLE `chart`
   MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `coid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `consultant_sessions`
 --
 ALTER TABLE `consultant_sessions`
   MODIFY `csid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `forum`
+--
+ALTER TABLE `forum`
+  MODIFY `fid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `session`
