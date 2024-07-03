@@ -12,18 +12,6 @@ if(isset($_POST['submit'])){
     if(empty($fname)||empty($email)||empty($phone)||empty($password)){
         $errorz = "You must fill all form field";
     }
-    // elseif(strlen($password)<8){
-    //     $errorz = "Your Password Must Contain At Least 8 Characters!";
-    // }
-    // elseif(!preg_match("#[0-9]+#",$password)) {
-    //     $errorz = "Your Password Must Contain At Least 1 Number!";
-    // }
-    // elseif(!preg_match("#[A-Z]+#",$password)) {
-    //     $errorz = "Your Password Must Contain At Least 1 Capital Letter!";
-    // }
-    // elseif(!preg_match("#[a-z]+#",$password)) {
-    //     $errorz = "Your Password Must Contain At Least 1 Lowercase Letter!";
-    // }
     else{
         
             $insert = "INSERT INTO `users`(`username`, `passwords`, `userType`, `fullname`, `phone`, `gender`)
@@ -60,7 +48,7 @@ if(isset($_POST['submit'])){
             <div class="col-md-9 col-lg-12 col-xl-10">
                 <div class="card shadow-lg o-hidden border-0 my-5">
                     <div class="card-body p-0">
-                        <div class="row">
+                        <!-- <div class="row"> -->
                             
                             <div class="col-lg-6">
                                 <div class="p-5">
