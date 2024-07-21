@@ -15,7 +15,7 @@
                     <li class="nav-item"><a class="nav-link" href="session.php"><i class="fas fa-business-time fa-sm fa-fw me-2 text-gray-400"></i><span>Sessions</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="forum.php"><i class="fas fa-thumbs-up fa-sm fa-fw me-2 text-gray-400"></i><span>Forum</span></a>
                     <li class="nav-item"><a class="nav-link" href="consultant.php"><i class="fas fa-user-shield fa-sm fa-fw me-2 text-gray-400"></i><span>Consultants&nbsp;</span></a>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-hands-helping fa-sm fa-fw me-2 text-gray-400"></i><span>Feedback&nbsp;</span></a>
+                    <!-- <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-hands-helping fa-sm fa-fw me-2 text-gray-400"></i><span>Feedback&nbsp;</span></a> -->
                     <li class="nav-item"><a class="nav-link" href="profile.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i><span>My Profile&nbsp;</span></a>
                     <li class="nav-item"><a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i><span>Sign Out&nbsp;</span></a>
                 </ul>

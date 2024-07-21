@@ -1,9 +1,23 @@
 <?php
 session_start();
-if(empty($_SESSION['Consultant'])){
+if (empty($_SESSION['Consultant'])) {
     header("location:../index.php");
 }
 $mtu = $_SESSION['Consultant'];
+
+// Include the helper function
+function compareWithCurrentDate($givenDate, $username) {
+    $currentDate = new DateTime();
+    $dateToCompare = new DateTime($givenDate);
+
+    if ($dateToCompare < $currentDate) {
+        return "<td><a href='#' class='btn bg-danger text-light'>Session Closed</a></td>";
+    } elseif ($dateToCompare > $currentDate) {
+        return "<td><a href='open_session.php?x=$username' class='btn bg-success text-light'>Open Session</a></td>";
+    } else {
+        return "<td><a href='open_session.php?x=$username' class='btn bg-success text-light'>Open Session</a></td>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +69,7 @@ $mtu = $_SESSION['Consultant'];
                                         AND availability.consultant_username = '$mtu'";
                                         $sno = 1;
                                         $sql = mysqli_query($con, $dep);
-                                        while($array = mysqli_fetch_array($sql)){
+                                        while ($array = mysqli_fetch_array($sql)) {
                                             // $aid = $array['sid'];    
                                             $date = $array['available_date'];
                                             $sname = $array['sname'];
@@ -66,9 +80,10 @@ $mtu = $_SESSION['Consultant'];
                                                 <td>$sno</td>
                                                 <td>$date</td>
                                                 <td>$sname</td>
-                                                <td>$un</td>
-                                                <td><a href='open_session.php?x=$un' class='btn bg-success text-light'>Open Session</a></td>
-                                            </tr>";
+                                                <td>$un</td>";
+                                            echo compareWithCurrentDate($date, $un);
+                                            echo "</tr>";
+                                            
                                             $sno++;
                                         }
                                         ?>

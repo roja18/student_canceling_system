@@ -1,47 +1,32 @@
 <?php
 error_reporting(0);
 require_once("includes/connection.php");
+$mtu = $_GET['x'];
 if(isset($_POST['submit'])){
-    $email=$_POST['email'];
-    $password=$_POST['password'];
-    
-    if(empty($email)||empty($password)){
+    $npassword = trim(stripslashes(htmlentities(strip_tags(trim($_POST['npassword'])))));
+    $cpassword = trim(stripslashes(htmlentities(strip_tags(trim($_POST['cpassword'])))));
+    $email = $_POST['email'];
+    $psw = password_hash($npassword, PASSWORD_DEFAULT);
+
+    if(empty($npassword)||empty($cpassword)){
         $errorz = "Please! You have to fill all field";
     }
     else{
-        $select="SELECT passwords,userType FROM users WHERE username='$email'";
-        // echo $select;
-        // die;
-        $query=mysqli_query($con,$select);
-        $ray=mysqli_fetch_array($query);
-        $paw=$ray['passwords'];
-        $utype=$ray['userType'];
-        
-        if(password_verify($password,$paw)){
-            if($utype=="Students"){
-                session_start();
-                $_SESSION['Students']=$email;
-                header("location:students/dashboard.php");
-            }
-            elseif($utype=="Admin"){
-                session_start();
-                $_SESSION['Admin']=$email;
-                header("location:admin/dashboard.php");
-            }
-            elseif($utype=="Consultant"){
-
-                session_start();
-                $_SESSION['Consultant']=$email;
-                header("location:consultants/dashboard.php");
-            }
-            
-            else{
-                $errorz="Something is wrong";
-            }
+        if($npassword!=$cpassword){
+            $errorz = "New password and Confim password are not the same";
         }
         else{
-            $errorz="wrong username or password";
-        } 
+            $select="UPDATE users SET passwords='$psw' WHERE username='$email'";
+            // echo $select;
+            // die;
+            $query=mysqli_query($con,$select);
+            if($query){
+                header("location:index.php"); 
+            }
+            else{
+                $errorz = "Email! does not existing";
+            }
+        }
     }
 } 
 ?>
@@ -51,7 +36,7 @@ if(isset($_POST['submit'])){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Login - SCS</title>
+    <title>Update Password - SCS</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
@@ -71,9 +56,9 @@ if(isset($_POST['submit'])){
                                 <div class="p-5">
                                     <div class="text-center">
                                         <img src="assets/img/atc.png" alt="logo">
-                                        <h4 class="text-dark mb-4">Welcome Back!</h4>
+                                        <h4 class="text-dark mb-4">Update Password</h4>
                                     </div>
-                                    <form class="user" method="POST" action="index.php">
+                                    <form class="user" method="POST" action="">
                                     <span>
                                         <?php
                                             if(isset($errorz)){
@@ -88,15 +73,14 @@ if(isset($_POST['submit'])){
                                             }
                                         ?>
                                     </span>
-                                        <div class="mb-3"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email"></div>
-                                        <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password"></div>
+                                        <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Enter New Password" name="npassword"></div>
+                                        <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Confim Password" name="cpassword"></div>
+                                        <input type="hidden" name="email" value="<?php echo $mtu?>">
                                         <div class="mb-3">
-                                            
-                                        </div><input name="submit" class="btn text-light d-block btn-user w-100" type="submit" style="background: rgb(17,111,3);" value="Login">
+                                        </div><input name="submit" class="btn text-light d-block btn-user w-100" type="submit" style="background: rgb(17,111,3);" value="Update">
                                         <hr>
                                     </form>
-                                    <div class="text-center"><a class="small" href="forgot-password.php">Forgot Password?</a></div>
-                                    <div class="text-center"><a class="small" href="register.php">Create an Account!</a></div>
+                                    <div class="text-center"><a class="small" href="login.php">Back to login</a></div>
                                 </div>
                             </div>
                         </div>

@@ -6,6 +6,28 @@ if(empty($_SESSION['Students'])){
 }
 $mtu = $_SESSION['Students'];
 // echo $mtu;
+require_once("../includes/connection.php");
+if(isset($_POST['submit'])){
+    $session = $_POST['sesionname'];        
+    $consultant = $_POST['sconsultant'];        
+    $insert = "INSERT INTO `students_sessions`(`username`, `session`, `consultant`) 
+    VALUES('$mtu','$session','$consultant')";
+    // echo $insert;
+    // die;
+    $query = mysqli_query($con,$insert);
+    if($query){
+    $succ = "Success to add session";
+    }
+    else{
+    $errorz = "Fail to add session";
+    }
+        
+            
+    }
+
+
+?>
+
 
 ?>
 <!DOCTYPE html>
@@ -40,20 +62,18 @@ $mtu = $_SESSION['Students'];
                                 <ul class="list-group list-group-flush">
                                 <?php
                                                                     require_once("../includes/connection.php");
-                                                                    $sql = mysqli_query($con, "SELECT session.sname, availability.available_date, appointment.statuz, appointment.apid, consultant_sessions.username FROM `availability`, session, appointment, consultant_sessions WHERE consultant_sessions.sid = session.sid AND availability.aid = appointment.aid AND appointment.username = '$mtu'");
+                                                                    $sql = mysqli_query($con, "SELECT students_sessions.ssid, session.sname, consultant_sessions.username FROM session, consultant_sessions, students_sessions WHERE consultant_sessions.sid = session.sid AND students_sessions.username = '$mtu'");
                                                                     while($array = mysqli_fetch_array($sql)){
-                                                                        $apid = $array['apid'];
+                                                                        $apid = $array['ssid'];
                                                                         $sname = $array['sname'];
-                                                                        $date = $array['available_date'];
-                                                                        $statuz = $array['statuz'];
                                                                         $username = $array['username'];
                                                                         echo "<li class='list-group-item'>
                                                                             <div class='row align-items-center no-gutters'>
                                                                                 <div class='col me-2'>
-                                                                                    <h6 class='mb-0'><strong>$sname</strong></h6><span class='text-xs'>$date</span>
+                                                                                    <h6 class='mb-0'><strong>$sname</strong></h6>
                                                                                 </div>
                                                                                 <div class='col-auto'>
-                                                                                    <div class='form-check'><a href='session_going.php?x=$apid&&y=$username'><i class='fas fa-business-time text-success'></i></a></label></div>
+                                                                                    <div class='form-check'><a href='session_going.php?x=$apid&&y=$username'><i class='fas fa-trush text-success'></i></a></label></div>
                                                                                 </div>
                                                                             </div>
                                                                         </li>";
@@ -88,7 +108,7 @@ $mtu = $_SESSION['Students'];
                                                     <div class="col">
                                                         <div class="mb-3">
                                                             <label class="form-label" for="session"><strong>Select Session</strong></label>
-                                                            <select class="form-control" id="session" name="session">
+                                                            <select class="form-control" id="session" name="sesionname">
                                                                 <option value="">Select Session</option>
                                                                 <?php
                                                                     require_once("../includes/connection.php");
@@ -107,7 +127,7 @@ $mtu = $_SESSION['Students'];
                                                     <div class="col">
                                                         <div class="mb-3">
                                                             <label class="form-label" for="consultant"><strong>Select Consultant</strong></label>
-                                                            <select class="form-control" id="consultant" name="consultant">
+                                                            <select class="form-control" id="consultant" name="sconsultant">
                                                                 <option value="">Select Consultant</option>
                                                                 <!-- Consultants will be loaded here by AJAX -->
                                                             </select>

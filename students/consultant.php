@@ -52,7 +52,7 @@ if(empty($_SESSION['Students'])){
                                         FROM users, session, consultant_sessions 
                                         WHERE session.sid = consultant_sessions.sid 
                                         AND users.username = consultant_sessions.username 
-                                        AND users.='Consultant'";
+                                        AND users.userType='Consultant'";
                                         $sno = 1;
                                         $sql = mysqli_query($con, $dep);
                                         while($array = mysqli_fetch_array($sql)){
@@ -65,7 +65,7 @@ if(empty($_SESSION['Students'])){
                                             echo "
                                             <tr>
                                                 <td>$sno</td>
-                                                <td><img class='rounded-circle me-2' width='30' height='30' src='assets/img/avatars/avatar1.jpeg'>$fl</td>
+                                                <td>$fl</td>
                                                 <td>$ge</td>
                                                 <td>$un</td>
                                                 <td>$ph</td>

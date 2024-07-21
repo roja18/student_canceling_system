@@ -27,48 +27,46 @@
                         <h3 class="text-dark mb-0">Dashboard</h3>
                         <!-- <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" style="background: rgb(17,111,3);"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a> -->
                     </div>
-                    <!-- <div class="row">
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-primary py-2">
+                     <div class="row">
+                        <div class="col-md-6 col-xl-4 mb-4">
+                            <div class="card shadow border-start-success py-2">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Earnings (monthly)</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>$40,000</span></div>
+                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Consultants</span></div>
+                                            <?php
+                                                require_once("../includes/connection.php");
+                                                $dep = "SELECT COUNT(*) AS total FROM users WHERE userType='Consultant'";
+                                                $sql = mysqli_query($con, $dep);
+                                                $array = mysqli_fetch_array($sql);
+                                                    $total = $array['total'];
+                                                ?>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo $total?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
+                       
+                        <div class="col-md-6 col-xl-4 mb-4">
                             <div class="card shadow border-start-success py-2">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Earnings (annual)</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>$215,000</span></div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-info py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Tasks</span></div>
+                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Students</span></div>
                                             <div class="row g-0 align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>50%</span></div>
+                                                <?php
+                                                require_once("../includes/connection.php");
+                                                $dep = "SELECT COUNT(*) AS stud FROM users WHERE userType='Students'";
+                                                $sql = mysqli_query($con, $dep);
+                                                $array = mysqli_fetch_array($sql);
+                                                    $stud = $array['stud'];
+                                                ?>
+                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span><?php echo $stud?></span></div>
                                                 </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm">
-                                                        <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="visually-hidden">50%</span></div>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
@@ -76,13 +74,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-warning py-2">
+                        <div class="col-md-6 col-xl-4 mb-4">
+                            <div class="card shadow border-start-success py-2">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Pending Requests</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>18</span></div>
+                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Sessions</span></div>
+                                            <?php
+                                                require_once("../includes/connection.php");
+                                                $dep = "SELECT COUNT(*) AS sess FROM session";
+                                                $sql = mysqli_query($con, $dep);
+                                                $array = mysqli_fetch_array($sql);
+                                                    $sess = $array['sess'];
+                                            ?>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo $sess?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-comments fa-2x text-gray-300"></i></div>
                                     </div>
@@ -90,11 +95,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!--<div class="row">
                         <div class="col-lg-7 col-xl-8">
                             <div class="card shadow mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h6 class="text-primary fw-bold m-0">Earnings Overview</h6>
+                                    <h6 class="text-success fw-bold m-0">Earnings Overview</h6>
                                     <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
                                         <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
                                             <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>

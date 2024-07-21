@@ -3,45 +3,25 @@ error_reporting(0);
 require_once("includes/connection.php");
 if(isset($_POST['submit'])){
     $email=$_POST['email'];
-    $password=$_POST['password'];
-    
-    if(empty($email)||empty($password)){
+
+    if(empty($email)){
         $errorz = "Please! You have to fill all field";
     }
     else{
-        $select="SELECT passwords,userType FROM users WHERE username='$email'";
+        $select="SELECT username FROM users WHERE username='$email'";
         // echo $select;
         // die;
         $query=mysqli_query($con,$select);
         $ray=mysqli_fetch_array($query);
-        $paw=$ray['passwords'];
-        $utype=$ray['userType'];
-        
-        if(password_verify($password,$paw)){
-            if($utype=="Students"){
-                session_start();
-                $_SESSION['Students']=$email;
-                header("location:students/dashboard.php");
-            }
-            elseif($utype=="Admin"){
-                session_start();
-                $_SESSION['Admin']=$email;
-                header("location:admin/dashboard.php");
-            }
-            elseif($utype=="Consultant"){
+        $user=$ray['username'];
 
-                session_start();
-                $_SESSION['Consultant']=$email;
-                header("location:consultants/dashboard.php");
-            }
-            
-            else{
-                $errorz="Something is wrong";
-            }
+        if($user == $email){
+            header("location:change_password.php?x=$email"); 
         }
         else{
-            $errorz="wrong username or password";
-        } 
+            $errorz = "Email! does not existing";
+        }
+         
     }
 } 
 ?>
@@ -71,9 +51,9 @@ if(isset($_POST['submit'])){
                                 <div class="p-5">
                                     <div class="text-center">
                                         <img src="assets/img/atc.png" alt="logo">
-                                        <h4 class="text-dark mb-4">Welcome Back!</h4>
+                                        <h4 class="text-dark mb-4">Enter Email Your Address</h4>
                                     </div>
-                                    <form class="user" method="POST" action="index.php">
+                                    <form class="user" method="POST" action="">
                                     <span>
                                         <?php
                                             if(isset($errorz)){
@@ -89,14 +69,12 @@ if(isset($_POST['submit'])){
                                         ?>
                                     </span>
                                         <div class="mb-3"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email"></div>
-                                        <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password"></div>
                                         <div class="mb-3">
                                             
-                                        </div><input name="submit" class="btn text-light d-block btn-user w-100" type="submit" style="background: rgb(17,111,3);" value="Login">
+                                        </div><input name="submit" class="btn text-light d-block btn-user w-100" type="submit" style="background: rgb(17,111,3);" value="Resert">
                                         <hr>
                                     </form>
-                                    <div class="text-center"><a class="small" href="forgot-password.php">Forgot Password?</a></div>
-                                    <div class="text-center"><a class="small" href="register.php">Create an Account!</a></div>
+                                    <div class="text-center"><a class="small" href="login.php">Back to login</a></div>
                                 </div>
                             </div>
                         </div>

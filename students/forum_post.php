@@ -34,10 +34,10 @@ if(isset($_POST['submit'])){
         else
         {
         $size=filesize($_FILES['image']['tmp_name']);
-        if($size>3145728)
+        if($size>5145728)
         {
         $errorz="You have exceeded the minimum size limit!";
-       
+
         }
         $title=rand(10000,99999);
         $name = $title.".".$extension;
@@ -57,9 +57,9 @@ if(isset($_POST['submit'])){
             else{
             $errorz = "Fail to submit arrival note. You alread submit";
         }}}}
-         
+
 }
-    
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
