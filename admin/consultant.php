@@ -62,7 +62,7 @@ if(empty($_SESSION['Admin'])){
                                             echo "
                                             <tr>
                                                 <td>$sno</td>
-                                                <td><img class='rounded-circle me-2' width='30' height='30' src='assets/img/avatars/avatar1.jpeg'>$fl</td>
+                                                <td>$fl</td>
                                                 <td>$ge</td>
                                                 <td>$un</td>
                                                 <td>$ph</td>

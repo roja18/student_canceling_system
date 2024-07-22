@@ -73,7 +73,7 @@ if(isset($_POST['submit'])){
                                                                                     <h6 class='mb-0'><strong>$sname</strong></h6>
                                                                                 </div>
                                                                                 <div class='col-auto'>
-                                                                                    <div class='form-check'><a href='session_going.php?x=$apid&&y=$username'><i class='fas fa-trush text-success'></i></a></label></div>
+                                                                                    <div class='form-check'><a href='session_going.php?x=$apid&&y=$username'><i class='fas fa-trush text-success'></i>open</a></label></div>
                                                                                 </div>
                                                                             </div>
                                                                         </li>";
